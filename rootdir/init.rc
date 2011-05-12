@@ -15,7 +15,6 @@ loglevel 3
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
-    export DOWNLOAD_CACHE /cache/download
     export EXTERNAL_STORAGE /mnt/sdcard
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
@@ -170,8 +169,6 @@ on post-fs
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
-
-    mkdir /cache/download 0771 system cache
 
     # create dalvik-cache and double-check the perms
     mkdir /data/dalvik-cache 0771 system system
