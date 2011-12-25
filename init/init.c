@@ -449,12 +449,12 @@ static void import_kernel_nv(char *name, int in_qemu)
             strlcpy(bootloader, value, sizeof(bootloader));
         } else if (!strcmp(name,"androidboot.hardware")) {
             strlcpy(hardware, value, sizeof(hardware));
-        } else if (!strcmp(name, "androidboot.emmc")) {
-            if (!strcmp(value, "true")) {
-                emmc_boot =1;
+        } else if (!strcmp(name,"androidboot.emmc")) {
+            if (!strcmp(value,"true")) {
+                emmc_boot = 1;
             }
         }
-    } else {
+     } else {
         /* in the emulator, export any kernel option with the
          * ro.kernel. prefix */
         char  buff[32];
@@ -604,7 +604,7 @@ static int set_init_properties_action(int nargs, char **args)
     property_set("ro.hardware", hardware);
     snprintf(tmp, PROP_VALUE_MAX, "%d", revision);
     property_set("ro.revision", tmp);
-    property_set("ro.emmc", emmc_boot ? "1" : "0");
+    property_set("ro.emmc",emmc_boot ? "1" : "0");
     return 0;
 }
 
@@ -739,7 +739,11 @@ int main(int argc, char **argv)
     /* skip mounting filesystems in charger mode */
     if (strcmp(bootmode, "charger") != 0) {
         action_for_each_trigger("early-fs", action_add_queue_tail);
+    if(emmc_boot) {
+        action_for_each_trigger("emmc-fs", action_add_queue_tail);
+    } else {
         action_for_each_trigger("fs", action_add_queue_tail);
+    }
         action_for_each_trigger("post-fs", action_add_queue_tail);
         action_for_each_trigger("post-fs-data", action_add_queue_tail);
     }
