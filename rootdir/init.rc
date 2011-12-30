@@ -1,6 +1,6 @@
 on early-init
     # Set init and its forked children's oom_adj.
-    write /proc/1/oom_adj -16
+    write /proc/1/oom_score_adj -16
 
     start ueventd
 
