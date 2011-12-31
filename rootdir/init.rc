@@ -188,14 +188,6 @@ on post-fs-data
     chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
     chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
 
-# Include extra init file
-    import /system/etc/init.local.rc
-
-# Run sysinit
-    exec /system/bin/sysinit
-
-    class_start default
-
 on boot
 # basic network init
     ifup lo
@@ -273,6 +265,14 @@ on boot
 
     class_start core
     class_start main
+
+start sysinit
+
+    class_start default
+
+service sysinit /system/bin/logwrapper /system/xbin/busybox run-parts /system/etc/init.d
+    disabled
+    oneshot
 
 on nonencrypted
     class_start late_start
