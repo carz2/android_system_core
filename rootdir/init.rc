@@ -1,6 +1,6 @@
 on early-init
     # Set init and its forked children's oom_adj.
-    write /proc/1/oom_adj -16
+    write /proc/1/oom_score_adj -16
 
     start ueventd
 
@@ -266,6 +266,14 @@ on boot
 
     class_start core
     class_start main
+
+start sysinit
+
+    class_start default
+
+service sysinit /system/bin/logwrapper /system/xbin/busybox run-parts /system/etc/init.d
+    disabled
+    oneshot
 
 on nonencrypted
     class_start late_start
