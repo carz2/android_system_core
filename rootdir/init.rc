@@ -5,6 +5,7 @@
 #
 
 import /init.${ro.hardware}.rc
+import /init.herring.rc
 import /init.usb.rc
 import /init.trace.rc
 
@@ -444,10 +445,6 @@ service bluetoothd /system/bin/bluetoothd -n
 service installd /system/bin/installd
     class main
     socket installd stream 600 system system
-
-service flash_recovery /system/etc/install-recovery.sh
-    class main
-    oneshot
 
 service racoon /system/bin/racoon
     class main
