@@ -5,7 +5,7 @@
 #
 
 import /init.${ro.hardware}.rc
-import /init.herring.rc
+# import /init.herring.rc
 import /init.usb.rc
 import /init.trace.rc
 
