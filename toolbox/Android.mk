@@ -82,8 +82,6 @@ LOCAL_SRC_FILES:= \
 	toolbox.c \
 	$(patsubst %,%.c,$(TOOLS))
 
-LOCAL_SRC_FILES += reboot.c
-
 LOCAL_SHARED_LIBRARIES := libcutils libc libusbhost
 
 LOCAL_C_INCLUDES := bionic/libc/bionic
